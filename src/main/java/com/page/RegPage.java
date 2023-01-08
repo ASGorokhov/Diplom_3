@@ -68,7 +68,6 @@ public class RegPage {
         return wrongPassErrorMessage.isDisplayed();
     }
 
-
     @Step ("Проверить наличие ошибки при попытке зарегистрироваться с уже существующим логином")
     public boolean isEmailCorrect() {
         return wrongPassErrorMessage.shouldBe(visible).getText().contains("Такой пользователь уже существует");}

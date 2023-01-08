@@ -1,43 +1,22 @@
-import com.UserOperations;
 import com.page.*;
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
-import org.junit.After;
 import static org.junit.Assert.*;
-import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Map;
-
 import static com.codeborne.selenide.Selenide.*;
-import static com.page.MainPage.MAIN_PAGE_URL;
-
 
 public class ProfilePageTest extends Config {
-    UserOperations userOperations = new UserOperations();
-    Map<String, String> newUser = userOperations.register();
+
     String email = newUser.get("email");
     String password = newUser.get("password");
     String name = newUser.get("name");
-    MainPage mainPage;
     AuthPage authPage = page(AuthPage.class);
     ProfilePage profilePage = page(ProfilePage.class);
-
-    @Before
-    public void before() {
-        mainPage = open(MAIN_PAGE_URL, MainPage.class);
-    }
-
-    @After
-    public void tearDown() {
-        userOperations.delete();
-        webdriver().driver().close();
-    }
 
     @Test
     @DisplayName("Проверка, что авторизованный пользователь может выйти по кнопке «Выход» из личного кабинета")
     @Description("При успешном выходе отобразится страница Входа c кнопкой «Войти»")
-
     public void logoutWithExitButtonTest()  {
         mainPage
                 .signInButtonClick()
